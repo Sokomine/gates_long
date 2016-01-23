@@ -128,8 +128,15 @@ gates_long.register_gate = function( type_name, desc, tiles, craft_from)
 end
 
 
-gates_long.register_gate( 'wood',      'wooden',    {'default_wood.png'},        "default:wood" )
-gates_long.register_gate( 'junglewood','junglewood',{'default_junglewood.png'},  "default:junglewood" )
-gates_long.register_gate( 'pine',      'pine',      {'default_pine_wood.png'},   "default:pine_wood" )
-gates_long.register_gate( 'acacia',    'acacia',    {'default_acacia_wood.png'}, "default:acacia_wood" )
-gates_long.register_gate( 'tree',      'tree',      {'default_tree.png^[transformR90'}, "default:tree" )
+gates_long.register_gate( 'wood',		'wooden',		{'default_wood.png'},				"default:wood" )
+gates_long.register_gate( 'junglewood',	'junglewood',	{'default_junglewood.png'},			"default:junglewood" )
+gates_long.register_gate( 'pine',		'pine',			{'default_pine_wood.png'},			"default:pine_wood" )
+gates_long.register_gate( 'acacia',		'acacia',		{'default_acacia_wood.png'},		"default:acacia_wood" )
+gates_long.register_gate( 'aspen',		'aspen',		{'default_aspen_wood.png'},			"default:aspen_wood" )
+gates_long.register_gate( 'tree',		'tree',			{'default_tree.png^[transformR90'},	"default:tree" )
+
+if minetest.get_modpath("valleys_c") then
+	gates_long.register_gate( 'birch',			'birch',			{'vmg_birch_wood.png'},				"valleys_c:birch_wood" )
+	gates_long.register_gate( 'cherry_blossom',	'cherry blossom',	{'vmg_cherry_blossom_wood.png'},	"valleys_c:cherry_blossom_wood" )
+	gates_long.register_gate( 'fir',			'fir',				{'vmg_fir_wood.png'},				"valleys_c:fir_wood" )
+end
