@@ -140,3 +140,17 @@ if minetest.get_modpath("valleys_c") then
 	gates_long.register_gate('cherry_blossom', 'cherry blossom', {'vmg_cherry_blossom_wood.png'}, "valleys_c:cherry_blossom_wood")
 	gates_long.register_gate('fir',            'fir',            {'vmg_fir_wood.png'},            "valleys_c:fir_wood")
 end
+
+if minetest.get_modpath("moretrees") and moretrees.treelist then
+        for i, v in ipairs(moretrees.treelist) do
+                local treename = v[1]
+                if treename ~= "jungletree" and treename ~= "poplar_small" then
+                        gates_long.register_gate(
+                                treename,
+                                treename,
+                                {"moretrees_"..treename.."_wood.png"},
+                                "moretrees:"..treename.."_planks"
+                        )
+                end
+        end
+end

@@ -8,6 +8,7 @@ keep cattle loss at a minimum, the gate will auto-close using an abm after
 about 5 seconds.
 
 Variants for all wood types from default are included, including default:tree.
+Moretrees and valleys\_c are supported too.
 
 Crafting:
           steel ingot - wood (or tree) - steel ingot
