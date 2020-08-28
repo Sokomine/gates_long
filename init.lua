@@ -132,4 +132,5 @@ gates_long.register_gate( 'wood',      'wooden',    {'default_wood.png'},       
 gates_long.register_gate( 'junglewood','junglewood',{'default_junglewood.png'},  "default:junglewood" )
 gates_long.register_gate( 'pine',      'pine',      {'default_pine_wood.png'},   "default:pine_wood" )
 gates_long.register_gate( 'acacia',    'acacia',    {'default_acacia_wood.png'}, "default:acacia_wood" )
+gates_long.register_gate( 'aspen',     'aspen',     {'default_aspen_wood.png'},  "default:aspen_wood" )
 gates_long.register_gate( 'tree',      'tree',      {'default_tree.png^[transformR90'}, "default:tree" )
