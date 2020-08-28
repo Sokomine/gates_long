@@ -134,3 +134,9 @@ gates_long.register_gate('pine',       'pine',       {'default_pine_wood.png'}, 
 gates_long.register_gate('acacia',     'acacia',     {'default_acacia_wood.png'},        "default:acacia_wood")
 gates_long.register_gate('aspen',      'aspen',      {'default_aspen_wood.png'},         "default:aspen_wood")
 gates_long.register_gate('tree',       'tree',       {'default_tree.png^[transformR90'}, "default:tree")
+
+if minetest.get_modpath("valleys_c") then
+	gates_long.register_gate('birch',          'birch',          {'vmg_birch_wood.png'},          "valleys_c:birch_wood")
+	gates_long.register_gate('cherry_blossom', 'cherry blossom', {'vmg_cherry_blossom_wood.png'}, "valleys_c:cherry_blossom_wood")
+	gates_long.register_gate('fir',            'fir',            {'vmg_fir_wood.png'},            "valleys_c:fir_wood")
+end
