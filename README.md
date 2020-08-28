@@ -11,5 +11,6 @@ Variants for all wood types from default are included, including default:tree.
 Moretrees and valleys\_c are supported too.
 
 Crafting:
-          steel ingot - wood (or tree) - steel ingot
-          (nothing)   - wood (or tree) - (nothing)
+
+    steel ingot - wood (or tree) - steel ingot
+    (nothing)   - wood (or tree) - (nothing)
