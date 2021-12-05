@@ -1,6 +1,8 @@
 
 gates_long = {}
 
+local fence_collision_extra = minetest.settings:get_bool("enable_fence_tall") and 3/8 or 0
+
 gates_long.register_gate = function( type_name, desc, tiles, craft_from)
 
 	-- the closed version contains the string "fence" in its name - thus preventing mobs from jumping over
@@ -41,6 +43,10 @@ gates_long.register_gate = function( type_name, desc, tiles, craft_from)
 				{  0.84, -0.24, -0.015,  0.91, -0.06,  0.015},
 				{  0.84,  0.16, -0.015,  0.91,  0.34,  0.015},
 			},
+		},
+		collision_box = {
+			type = "fixed",
+			fixed = {-(1/2 + 3/8), -1/2, -1/8, (1/2 + 3/8), 1/2 + fence_collision_extra, 1/8},
 		},
 		selection_box = {
 			type = "fixed",
