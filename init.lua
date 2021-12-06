@@ -56,6 +56,8 @@ gates_long.register_gate = function( type_name, desc, tiles, craft_from)
 		},
                 on_rightclick = function(pos, node, puncher)
 			minetest.swap_node(pos, {name = "gates_long:gate_open_"..type_name, param2 = node.param2})
+			local timer = minetest.get_node_timer(pos)
+			timer:start(5)
                 end,
 		is_ground_content = false,
 	})
@@ -111,18 +113,16 @@ gates_long.register_gate = function( type_name, desc, tiles, craft_from)
                     minetest.swap_node(pos, {name = "gates_long:fence_gate_closed_"..type_name, param2 = node.param2})
                 end,
 		is_ground_content = false,
+
+		on_timer = function(pos)
+			old_node = minetest.get_node(pos)
+			if old_node.name == "gates_long:gate_open_"..type_name then
+				minetest.swap_node(pos, {name = "gates_long:fence_gate_closed_"..type_name, param2 = old_node.param2})
+			end
+		end,
+
 	})
 
-
-	-- automaticly close the gates again to prevent cattle from escaping
-	minetest.register_abm({
-		nodenames = {"gates_long:gate_open_"..type_name},
-		interval = 5,
-		chance = 1,
-		action = function(pos, old_node)
-			minetest.swap_node(pos, {name = "gates_long:fence_gate_closed_"..type_name, param2 = old_node.param2})
-		end
-	})
 
 	minetest.register_craft({
 		output = "gates_long:fence_gate_closed_"..type_name.." 2",
