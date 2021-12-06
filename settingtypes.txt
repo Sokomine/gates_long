@@ -1,0 +1,6 @@
+#With this setting, the wide gates will automatically close after a
+#certain amount of time of being opened, to stop cattle escaping.
+gates_long_autoclose_enabled (Enable auto-closing gates) bool true
+
+#The number of seconds the gates will take to auto-close.
+gates_long_autoclose_time (Number of seconds gates take to close) int 5 1 3600

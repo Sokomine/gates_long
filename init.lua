@@ -1,5 +1,8 @@
 gates_long = {}
 
+local gates_long_autoclose_enabled = minetest.settings:get_bool("gates_long_autoclose_enabled", true)
+local gates_long_autoclose_time = tonumber(minetest.settings:get("gates_long_autoclose_time")) or 5
+
 local fence_collision_extra = minetest.settings:get_bool("enable_fence_tall") and 3/8 or 0
 
 gates_long.register_gate = function(type_name, desc, tiles, craft_from)
@@ -58,8 +61,10 @@ gates_long.register_gate = function(type_name, desc, tiles, craft_from)
 		},
 		on_rightclick = function(pos, node, puncher)
 			minetest.swap_node(pos, {name = gate_open_name, param2 = node.param2})
-			local timer = minetest.get_node_timer(pos)
-			timer:start(5)
+			if gates_long_autoclose_enabled then
+				local timer = minetest.get_node_timer(pos)
+				timer:start(gates_long_autoclose_time)
+			end
 		end,
 		is_ground_content = false,
 	})
