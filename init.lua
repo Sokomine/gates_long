@@ -8,8 +8,8 @@ gates_long.register_gate = function(type_name, desc, tiles, craft_from)
 	local gate_closed_name = "gates_long:fence_gate_closed_" .. type_name
 	local gate_open_name = "gates_long:gate_open_" .. type_name
 
-	minetest.register_node(gate_closed_name, {
-		description = desc.." fence gate (closed)",
+	minetest.register_node(":" .. gate_closed_name, {
+		description = desc.." Wide Fence Gate",
 		drawtype = "nodebox",
 		-- top, bottom, side1, side2, inner, outer
 		tiles = tiles,
@@ -63,10 +63,13 @@ gates_long.register_gate = function(type_name, desc, tiles, craft_from)
 		end,
 		is_ground_content = false,
 	})
+	minetest.override_item(gate_closed_name, {
+		mod_origin = 'gates_long',
+	})
 
 
-	minetest.register_node(gate_open_name, {
-		description = desc.." fence gate (open)",
+	minetest.register_node(":" .. gate_open_name, {
+		description = desc.." Wide Fence Gate",
 		drawtype = "nodebox",
 		-- top, bottom, side1, side2, inner, outer
 		tiles = tiles,
@@ -121,6 +124,9 @@ gates_long.register_gate = function(type_name, desc, tiles, craft_from)
 		end,
 		is_ground_content = false,
 	})
+	minetest.override_item(gate_open_name, {
+		mod_origin = 'gates_long',
+	})
 
 
 	minetest.register_craft({
@@ -133,9 +139,10 @@ gates_long.register_gate = function(type_name, desc, tiles, craft_from)
 
 end
 
-
-gates_long.register_gate( 'wood',      'wooden',    {'default_wood.png'},	"default:wood" )
-gates_long.register_gate( 'junglewood','junglewood',{'default_junglewood.png'},  "default:junglewood" )
-gates_long.register_gate( 'pine',      'pine',      {'default_pine_wood.png'},   "default:pine_wood" )
-gates_long.register_gate( 'acacia',    'acacia',    {'default_acacia_wood.png'}, "default:acacia_wood" )
-gates_long.register_gate( 'tree',      'tree',      {'default_tree.png^[transformR90'}, "default:tree" )
+minetest.register_on_mods_loaded(function()
+  for nodename, nodedef in pairs(minetest.registered_nodes) do
+    if nodedef.drawtype == "normal" and nodedef.groups and nodedef.groups.wood then
+      gates_long.register_gate(nodename:gsub(":","_"), nodedef.description, nodedef.tiles, nodename)
+    end
+  end
+end)
