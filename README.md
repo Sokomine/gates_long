@@ -1,14 +1,20 @@
+# Gates Long
+
 This is a mod for Minetest.
 
-It adds gates that fit well to fences and xconnected nodes.
-The passageway through the fence gate is not as slim as with other, existing
-mods. Mobs from TenPlus1' version of simple mobs cannot jump over the
-closed gate. They can walk through the open gate of course. In order to
-keep cattle loss at a minimum, the gate will auto-close using an abm after
-about 5 seconds.
+Adds gates that are wider than the default gates, making it easier to get mobs to pass through them.
 
-Variants for all wood types from default are included, including default:tree.
+The gates respect the `enable_fence_tall` setting, making it possible to stop mobs jumping over them.
 
-Crafting:
-          steel ingot - wood (or tree) - steel ingot
-          (nothing)   - wood (or tree) - (nothing)
+A setting allows the gates to automatically close after a certain number of seconds.
+
+Gates are automatically added for all wood types, by looking for any registered nodes:
+* in the `wood` group
+* that are  a full cube node (`drawtype` is 'normal')
+
+## Crafting
+
+```
+steel ingot - wood - steel ingot
+(nothing)   - wood - (nothing)
+```
