@@ -1,17 +1,17 @@
 
 gates_long = {}
 
-gates_long.register_gate = function( type_name, desc, tiles, craft_from)
+gates_long.register_gate = function(type_name, desc, tiles, craft_from)
 
 	-- the closed version contains the string "fence" in its name - thus preventing mobs from jumping over
 	minetest.register_node("gates_long:fence_gate_closed_"..type_name, {
 		description = desc.." fence gate (closed)",
 		drawtype = "nodebox",
-                -- top, bottom, side1, side2, inner, outer
+		 -- top, bottom, side1, side2, inner, outer
 		tiles = tiles,
 		paramtype = "light",
 		paramtype2 = "facedir",
-		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
+		groups = {snappy=2, choppy=2, oddly_breakable_by_hand=2},
 		node_box = {
 			type = "fixed",
 			fixed = {
@@ -48,9 +48,9 @@ gates_long.register_gate = function( type_name, desc, tiles, craft_from)
 				{ -0.85, -0.25, -0.1,  0.85,  0.35,  0.1},
 			},
 		},
-                on_rightclick = function(pos, node, puncher)
+		on_rightclick = function(pos, node, puncher)
 			minetest.swap_node(pos, {name = "gates_long:gate_open_"..type_name, param2 = node.param2})
-                end,
+		end,
 		is_ground_content = false,
 	})
 
@@ -59,12 +59,12 @@ gates_long.register_gate = function( type_name, desc, tiles, craft_from)
 	minetest.register_node("gates_long:gate_open_"..type_name, {
 		description = desc.." fence gate (open)",
 		drawtype = "nodebox",
-                -- top, bottom, side1, side2, inner, outer
+		-- top, bottom, side1, side2, inner, outer
 		tiles = tiles,
 		paramtype = "light",
 		paramtype2 = "facedir",
 		drop = "gates_long:fence_gate_closed_"..type_name,
-		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2,not_in_creative_inventory=1},
+		groups = {snappy=2, choppy=2, oddly_breakable_by_hand=2, not_in_creative_inventory=1},
 		node_box = {
 			type = "fixed",
 			fixed = {
@@ -101,9 +101,9 @@ gates_long.register_gate = function( type_name, desc, tiles, craft_from)
 				{ -0.90, -0.25, 0,  0.90,  0.35,  0.50},
 			},
 		},
-                on_rightclick = function(pos, node, puncher)
-                    minetest.swap_node(pos, {name = "gates_long:fence_gate_closed_"..type_name, param2 = node.param2})
-                end,
+		on_rightclick = function(pos, node, puncher)
+			minetest.swap_node(pos, {name = "gates_long:fence_gate_closed_"..type_name, param2 = node.param2})
+		end,
 		is_ground_content = false,
 	})
 
@@ -120,23 +120,38 @@ gates_long.register_gate = function( type_name, desc, tiles, craft_from)
 
 	minetest.register_craft({
 		output = "gates_long:fence_gate_closed_"..type_name.." 2",
-                recipe = {
-                        { "default:steel_ingot", craft_from, "default:steel_ingot" },
-                        { "",                    craft_from,         "" },
-                }
-        })
+		recipe = {
+			{ "default:steel_ingot", craft_from, "default:steel_ingot" },
+			{ "",                    craft_from, "" },
+		}
+	})
 end
 
 
-gates_long.register_gate( 'wood',		'wooden',		{'default_wood.png'},				"default:wood" )
-gates_long.register_gate( 'junglewood',	'junglewood',	{'default_junglewood.png'},			"default:junglewood" )
-gates_long.register_gate( 'pine',		'pine',			{'default_pine_wood.png'},			"default:pine_wood" )
-gates_long.register_gate( 'acacia',		'acacia',		{'default_acacia_wood.png'},		"default:acacia_wood" )
-gates_long.register_gate( 'aspen',		'aspen',		{'default_aspen_wood.png'},			"default:aspen_wood" )
-gates_long.register_gate( 'tree',		'tree',			{'default_tree.png^[transformR90'},	"default:tree" )
+gates_long.register_gate('wood',       'wooden',     {'default_wood.png'},               "default:wood")
+gates_long.register_gate('junglewood', 'junglewood', {'default_junglewood.png'},         "default:junglewood")
+gates_long.register_gate('pine',       'pine',       {'default_pine_wood.png'},          "default:pine_wood")
+gates_long.register_gate('acacia',     'acacia',     {'default_acacia_wood.png'},        "default:acacia_wood")
+gates_long.register_gate('aspen',      'aspen',      {'default_aspen_wood.png'},         "default:aspen_wood")
+gates_long.register_gate('tree',       'tree',       {'default_tree.png^[transformR90'}, "default:tree")
+
 
 if minetest.get_modpath("valleys_c") then
 	gates_long.register_gate( 'birch',			'birch',			{'vmg_birch_wood.png'},				"valleys_c:birch_wood" )
 	gates_long.register_gate( 'cherry_blossom',	'cherry blossom',	{'vmg_cherry_blossom_wood.png'},	"valleys_c:cherry_blossom_wood" )
 	gates_long.register_gate( 'fir',			'fir',				{'vmg_fir_wood.png'},				"valleys_c:fir_wood" )
+end
+
+if minetest.get_modpath("moretrees") and moretrees.treelist then
+        for i, v in ipairs(moretrees.treelist) do
+                local treename = v[1]
+                if treename ~= "jungletree" and treename ~= "poplar_small" then
+                        gates_long.register_gate(
+                                treename,
+                                treename,
+                                {"moretrees_"..treename.."_wood.png"},
+                                "moretrees:"..treename.."_planks"
+                        )
+                end
+        end
 end
